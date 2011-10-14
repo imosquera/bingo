@@ -3,7 +3,7 @@ import settings
 import urllib2,re
 from BeautifulSoup import BeautifulSoup
 from django.core.management.base import BaseCommand, CommandError
-from bingo.sheetparser.models import Matchup, MatchupTrend
+from bingo.matchups.models import Matchup, MatchupTrend
 import logging
 logger = logging.getLogger(__name__)
 class Command(BaseCommand):

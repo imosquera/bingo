@@ -2,7 +2,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+SOUTH_AUTO_FREEZE_APP = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -110,7 +110,9 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'sheetparser',
+    'rank',
     'south',
+    'matchups',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -148,7 +150,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'sheetparser': {
+        'rank': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
