@@ -1,4 +1,4 @@
-import math
+import math, os
 from bingo.matchups.models import Matchup, MatchupTrend
 import logging
 logger = logging.getLogger(__name__)

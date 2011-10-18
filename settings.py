@@ -68,7 +68,7 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 #This is where we will place all 
-SITE_DATA = '/usr/local/bingodata'
+SITE_DATA_DIR = '/usr/local/bingodata'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'sheetparser',
     'rank',
     'south',
+    'crawler',
     'matchups',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -153,9 +154,9 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'rank': {
+        '': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
  
