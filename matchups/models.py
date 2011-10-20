@@ -24,13 +24,12 @@ class Matchup(models.Model):
     home_team = models.ForeignKey('Team', related_name='home_matchups')
     away_team = models.ForeignKey('Team', related_name='away_matchups')
     rank = models.DecimalField(max_digits=10, decimal_places=2, null=True,blank=True)
+    team_advantage = models.ForeignKey('Team', related_name='matchup_advantages', null=True)
     gametime = models.DateTimeField()
     season = models.IntegerField(max_length=6)
-    """
-    we can add this in later
-    home_team = models.CharField(max_length=50)
-    away_team = models.CharField(max_length=50)
-    """
+    home_win_ats = models.CharField(max_length=8, null=True)
+    away_win_ats = models.CharField(max_length=8, null=True)
+    is_over = models.CharField(max_length=8, null=True)
 
 class MatchupTrend(models.Model):
     class Meta:
@@ -42,5 +41,5 @@ class MatchupTrend(models.Model):
     current_loss =  models.IntegerField(max_length=5) 
     last3_win = models.IntegerField(max_length=5) 
     last3_loss = models.IntegerField(max_length=5) 
-    since1992_win = models.IntegerField(max_length=5)   
-    since1992_loss = models.IntegerField(max_length=5)  
+    since1992_win = models.IntegerField(max_length=5,null=True)   
+    since1992_loss = models.IntegerField(max_length=5,null=True)  

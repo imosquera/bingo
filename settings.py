@@ -1,6 +1,6 @@
 # Django settings for sheetparser project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 SOUTH_AUTO_FREEZE_APP = True
 ADMINS = (
@@ -156,8 +156,8 @@ LOGGING = {
         },
         '': {
             'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
+            'level': 'DEBUG',
+            'propagate': False,
         },
  
     }

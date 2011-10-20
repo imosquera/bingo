@@ -6,23 +6,26 @@ import logging
 import os,shutil
 import md5
 logger = logging.getLogger(__name__)
+year = "2007"
+
 class Command(BaseCommand):
 
     args = '<poll_id poll_id ...>'
     help = 'Closes the specified poll for voting'
 
     def handle(self, *args, **options):
-        matchups_dir = settings.SITE_DATA_DIR + "/insider_boxscore_seasons/2011/"
-        if not os.path.exists( matchups_dir ):
-            os.makedirs(matchups_dir)
-
-        param_url = "http://www.vegasinsider.com/college-football/scoreboard/scores.cfm/week/%i/season/2010"
+     
+        param_url = "http://www.vegasinsider.com/college-football/matchups/matchups.cfm/week/%i/season/%s"
+        matchup_dir_param = settings.SITE_DATA_DIR + "/insider_matchups/%s/%i" 
         for i in range(1,16):
-            url = param_url%i
-            print url
-            m = md5.new()
-            m.update(url)
-            filename = matchups_dir + m.hexdigest()
+            matchups_dir = matchup_dir_param % (year, i)
+            if not os.path.exists( matchups_dir):
+                os.makedirs(matchups_dir)
+
+            url = param_url%(i, year)
+            logger.info("URL: %s" % url)
+
+            filename = matchups_dir + "/matchup"
             logger.info( filename + " for url: " + url )
             url_html = urllib2.urlopen( url ).read()
             print filename

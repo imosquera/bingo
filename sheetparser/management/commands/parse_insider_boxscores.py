@@ -8,13 +8,15 @@ import math
 import logging
 logger = logging.getLogger(__name__)
 DEBUG=False
+YEAR = "2008"
+
 class Command(BaseCommand):
 
     args = '<poll_id poll_id ...>'
     help = 'Closes the specified poll for voting'
 
     def handle(self, *args, **options):
-        path = "/usr/local/bingodata/insider_boxscore_seasons/2011/"
+        path = "/usr/local/bingodata/insider_boxscore_seasons/%s/" % YEAR
         paths = [path + f for f in os.listdir(path)]
         #paths = ["/usr/local/bingodata/insider_boxscore_seasons/2011/b51bdc5b69502c4f9fac30bbac7618e9"]
         for p in paths:
@@ -52,7 +54,7 @@ def parse_matchup(matchup_data):
 
     matchup = Matchup()
     insider_game_id = "%s-@-%s" % (away_team.name.replace(' ','-'), home_team.name.replace(' ','-'))
-    found_matchups = Matchup.objects.filter(insider_game_id=insider_game_id, gametime=matchup_date)
+    found_matchups = Matchup.objects.filter(insider_game_id=insider_game_id, gametime=matchup_date, season=YEAR)
     if len(found_matchups) > 0:
         matchup = found_matchups[0]
     else:
@@ -61,6 +63,7 @@ def parse_matchup(matchup_data):
     matchup.gametime = matchup_date
     matchup.home_team = home_team
     matchup.away_team = away_team
+    matchup.season = int(YEAR)
     get_lines_and_score( matchup, matchup_table )
     logger.info("final score was: %s to %s for game: %s " % (str(matchup.away_score), str(matchup.home_score), matchup.insider_game_id) )
     try:
